@@ -89,3 +89,79 @@ This README provides a complete guide for users to set up, build, run, and inter
 
 
 
+
+### High-Level Design Description
+## Components Overview
+
+## Book Inventory Service
+
+- Browsing and Searching: Users can browse the book inventory and search for books using various parameters (title, genre, ISBN, author).
+
+
+- Manages the collection of books available in the store.
+Responsible for adding, updating, and retrieving book details.
+Provides search functionality based on title, genre, ISBN, and author.
+Shopping Cart Service
+
+- Manages the user's shopping cart.
+Allows users to add or remove books from the cart.
+Provides functionality to view the contents of the cart.
+Checkout Service
+
+- Handles the checkout process.
+Simulates payment processing through Web, USSD, and Transfer options.
+Validates the cart contents before proceeding to payment.
+Purchase History Service
+
+- Stores and retrieves the user's purchase history.
+Allows users to view past transactions.
+
+## Database
+
+- A relational database (e.g., MySQL, PostgreSQL) to store book inventory, user data, shopping cart contents, and purchase history.
+Unit Testing
+
+- A suite of unit tests to ensure the functionality of each component.
+Frameworks: JUnit, Mockito for testing in Java.
+
+### Preloaded User details
+```bash
+
++-------------------+
+|    Clien          |
+|  (Web Application)|
++-------------------+
+|
+v
++-------------------+
+| Book Inventory    |
+| Service           |
++-------------------+
+|
+v
++-------------------+
+| Shopping Cart     |
+| Service           |
++-------------------+
+|
+v
++-------------------+
+| Checkout Service/ |
+| Order Service     |
++-------------------+
+|
+v
++---------------------+
+| Transaction Service/|    
+| Purchase History    |            |
++---------------------+
+|
+v
++-------------------+
+|     Database      |
+| (Books, Users,    |
+|  Cart, History)   |
++-------------------+
+
+
+```
