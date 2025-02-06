@@ -41,6 +41,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public HttpResponse<UserResponse> createUser(UserRequest request) {
+        if(userExists(request.getUsername())){
+            throw new BookStoreException("User already exist");
+        }
         User user = mapUserRequestToModel(request);
         User savedUser = userRepository.save(user);
         return HttpResponse.<UserResponse>builder()

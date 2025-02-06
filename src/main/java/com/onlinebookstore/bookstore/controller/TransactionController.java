@@ -23,7 +23,7 @@ public class TransactionController {
     }
 
     @GetMapping("")
-    public ResponseEntity<HttpResponse<Page<TransactionResponse>>> getTransactionByUser(@RequestParam(required = true) String username,
+    public ResponseEntity<HttpResponse<Page<TransactionResponse>>> getTransactionByUser(@RequestParam String username,
                                                                                         @RequestParam(required = false) String reference,
                                                                                         @RequestParam Optional<Integer> page,
                                                                                         @RequestParam Optional<Integer> size) {

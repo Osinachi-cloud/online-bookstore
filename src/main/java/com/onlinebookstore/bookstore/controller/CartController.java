@@ -20,13 +20,13 @@ public class CartController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<HttpResponse<CartResponse>> addToCart(@RequestBody CartRequest cartItemRequest) {
-        return ResponseEntity.ok(cartService.addToCart(cartItemRequest));
+    public ResponseEntity<HttpResponse<CartResponse>> addToCart(@RequestParam String username, @RequestBody CartRequest cartItemRequest) {
+        return ResponseEntity.ok(cartService.addToCart(cartItemRequest, username));
     }
 
     @PostMapping("/remove")
-    public ResponseEntity<HttpResponse<CartResponse>> removeFromCart(@RequestBody CartRequest cartItemRequest) {
-        return ResponseEntity.ok(cartService.removeFromCart(cartItemRequest));
+    public ResponseEntity<HttpResponse<CartResponse>> removeFromCart(@RequestParam String username, @RequestBody CartRequest cartItemRequest) {
+        return ResponseEntity.ok(cartService.removeFromCart(cartItemRequest, username));
     }
 
     @GetMapping("")

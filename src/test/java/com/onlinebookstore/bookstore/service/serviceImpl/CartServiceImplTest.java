@@ -49,9 +49,7 @@ class CartServiceImplTest {
     void testAddToCart() {
         final CartRequest cartRequest = new CartRequest();
         cartRequest.setBookId(0L);
-        cartRequest.setQuantity(1); // Set to a valid quantity
-        cartRequest.setUsername("username");
-        cartRequest.setAmount(0.0);
+        cartRequest.setQuantity(1);
 
         final BookResponse book = new BookResponse();
         book.setTitle("title");
@@ -102,7 +100,7 @@ class CartServiceImplTest {
             return savedCart;
         });
 
-        final HttpResponse<CartResponse> result = cartServiceImplUnderTest.addToCart(cartRequest);
+        final HttpResponse<CartResponse> result = cartServiceImplUnderTest.addToCart(cartRequest, "username");
         result.setTimeStamp("05-02_2024");
         result.setStatusCode(200);
 
@@ -172,8 +170,6 @@ class CartServiceImplTest {
         final CartRequest cartRequest = new CartRequest();
         cartRequest.setBookId(0L);
         cartRequest.setQuantity(0);
-        cartRequest.setUsername("username");
-        cartRequest.setAmount(0.0);
 
         final BookResponse book = new BookResponse();
         book.setTitle("title");
@@ -218,7 +214,7 @@ class CartServiceImplTest {
         cart1.setAmount(0.0);
         when(mockCartRepository.findByUserAndBook(user1, book1)).thenReturn(Optional.of(cart1));
 
-        final HttpResponse<CartResponse> result = cartServiceImplUnderTest.removeFromCart(cartRequest);
+        final HttpResponse<CartResponse> result = cartServiceImplUnderTest.removeFromCart(cartRequest, "username");
 
         result.setTimeStamp("05-02-2025");
         result.setStatusCode(200);

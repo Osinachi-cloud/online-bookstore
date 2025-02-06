@@ -52,7 +52,7 @@ mvn test
 ### Summary of Additions
 - **API Endpoints**: A comprehensive list of all the API endpoints, including their methods, request bodies, and expected responses.
 - **Port Information**: Clear mention that the application will be accessible at `http://localhost:8090` after running.
-- **Endpoint Docs**: http://localhost:8090/api/swagger-ui/index.html
+- **Swagger Endpoint Docs**: http://localhost:8090/api/swagger-ui/index.html
 
 This README provides a complete guide for users to set up, build, run, and interact with the Online Bookstore application.
 

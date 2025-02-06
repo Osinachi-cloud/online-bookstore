@@ -36,9 +36,9 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public HttpResponse<CartResponse> addToCart(CartRequest cartRequest){
+    public HttpResponse<CartResponse> addToCart(CartRequest cartRequest, String username){
         Book book = bookService.getBook(cartRequest.getBookId());
-        User user = userService.getUser(cartRequest.getUsername());
+        User user = userService.getUser(username);
 
         Optional<Cart> existingCart = cartRepository.findByUserAndBook(user, book);
         if(existingCart.isEmpty()){
@@ -82,9 +82,9 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public HttpResponse<CartResponse> removeFromCart(CartRequest cartRequest) {
+    public HttpResponse<CartResponse> removeFromCart(CartRequest cartRequest, String username) {
         Book book = bookService.getBook(cartRequest.getBookId());
-        User user = userService.getUser(cartRequest.getUsername());
+        User user = userService.getUser(username);
 
         Optional<Cart> existingCart = cartRepository.findByUserAndBook(user, book);
 

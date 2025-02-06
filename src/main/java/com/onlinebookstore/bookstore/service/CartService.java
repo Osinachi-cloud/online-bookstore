@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface CartService {
 
-    HttpResponse<CartResponse> addToCart(CartRequest cartItemDtos);
+    HttpResponse<CartResponse> addToCart(CartRequest cartRequest, String username);
     HttpResponse<List<CartResponse>> getCartByUser(String username);
 
-    HttpResponse<CartResponse> removeFromCart(CartRequest cartItemRequest);
+    HttpResponse<CartResponse> removeFromCart(CartRequest cartItemRequest, String username);
 }
