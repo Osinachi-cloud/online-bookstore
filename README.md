@@ -124,7 +124,7 @@ Unit Testing
 - A suite of unit tests to ensure the functionality of each component.
 Frameworks: JUnit, Mockito for testing in Java.
 
-### Preloaded User details
+### User flow
 ```bash
 
 +-------------------+
