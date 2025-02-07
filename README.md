@@ -143,7 +143,7 @@ Frameworks: JUnit, Mockito for testing in Java.
  |  | view cart         |                  | (Books, Users,    |
  |  |                   |                  |  Cart, History)   |
  |  |                   |                  +-------------------+
- |  |                   |                     |   |     |     ^
+ |  |                   |                     |   |     ^     ^
  |  |        +-------------------+            |   |     |     |
  |  |        | Book Inventory    |<-----------+   |     |     |
  |  |        | Service           |                |     |     |
