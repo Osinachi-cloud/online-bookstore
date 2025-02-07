@@ -28,16 +28,13 @@ import java.util.List;
 public class PaymentServiceImpl implements PaymentService {
 
 
-    @Value("${paystack.secret-key}")
+    @Value("${secret-key}")
     private String secretKey;
 
-    @Value("${paystack.initialize-payment-url}")
+    @Value("${initialize-payment-url}")
     private String initializePaymentUrl;
 
-    @Value("${paystack.call-back-url}")
-    private String callBackURL;
-
-    @Value("${paystack.verification-url}")
+    @Value("${verification-url}")
     private String verificationUrl;
 
     private final OrderService orderService;
@@ -48,11 +45,21 @@ public class PaymentServiceImpl implements PaymentService {
         this.transactionService = transactionService;
     }
 
+
+    /**
+     * Passes {@link InitializeTransactionRequest} to initialize payment.*
+     * calls the {@link initializePaymentUrl} pass in the {@link secretKey}
+     * @return a {@link InitializeTransactionResponse} object which contains the reference.
+     * fails when you pass in a card pan with less or more than 16 characters
+     * @throws BookStoreException if an error occurs while calling the endpoint.
+     */
     @Override
     @Transactional
     public InitializeTransactionResponse initTransaction(InitializeTransactionRequest request) throws Exception {
         InitializeTransactionResponse initializeTransactionResponse = null;
         try {
+
+            // calls payment gateway endpoint to initialize payment.
 
             ObjectMapper mapper = new ObjectMapper();
 
@@ -74,8 +81,15 @@ public class PaymentServiceImpl implements PaymentService {
         }
     }
 
+    /**
+     * Passes the reference gotten from initialize payment.*
+     * calls the {@link verificationUrl}
+     * @return a PaymentVerificationResponse object.
+     * @throws BookStoreException if an error occurs while calling the endpoint.
+     */
+
     @Override
-//    @Transactional
+    @Transactional
     public PaymentVerificationResponse paymentVerification(String reference) throws Exception {
         List<BookOrder> bookOrders = orderService.getOrdersByTransactionId(reference);
         boolean transactionExists = transactionService.existsByReference(reference);
@@ -101,6 +115,8 @@ public class PaymentServiceImpl implements PaymentService {
 
 
         try{
+
+            // calls payment gateway verify endpoint passing the reference received from payment initialization
 
             ObjectMapper mapper = new ObjectMapper();
 

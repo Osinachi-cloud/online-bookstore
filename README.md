@@ -13,6 +13,13 @@ The Online Bookstore is a Spring Boot application that provides a platform for u
 - **Unit Testing**: Comprehensive unit tests to ensure functionality.
 - **High-Level Design**: Scalable and fault-tolerant design.
 
+### Payment/ Checkout flow
+- **Initiate payment success**: this intends to call the initiate payment endpoint and if successful gets a reference from the payment gateway.
+- **Initiate payment failure**: To initiate a failure response pass in a card pan less or more than 16 characters.
+- **Verify payment**: the reference gotten from the initiate payment is passed in the verify payment to complete the payment process.
+
+
+
 ## Technologies Used
 - **Java**: 17
 - **Spring Boot**: 3.4.2
@@ -49,13 +56,10 @@ mvn test
 ```
 
 
-### Summary of Additions
-- **API Endpoints**: A comprehensive list of all the API endpoints, including their methods, request bodies, and expected responses.
-- **Port Information**: Clear mention that the application will be accessible at `http://localhost:8090` after running.
-- **Swagger Endpoint Docs**: http://localhost:8090/api/swagger-ui/index.html
-
-This README provides a complete guide for users to set up, build, run, and interact with the Online Bookstore application.
-
+### Summary
+- **API Endpoints**: A comprehensive list of all the API endpoints, including their methods, request bodies, and expected responses is provided in the swagger docs url below.
+- **Port Information**: the application will be accessible at `http://localhost:8090` after running.
+- **Swagger endpoints Docs**: http://localhost:8090/swagger-ui/index.html
 
 
 ### Preloaded book details
@@ -127,41 +131,37 @@ Frameworks: JUnit, Mockito for testing in Java.
 ### User flow
 ```bash
 
-+-------------------+
-|    Clien          |
-|  (Web Application)|
-+-------------------+
-|
-v
-+-------------------+
-| Book Inventory    |
-| Service           |
-+-------------------+
-|
-v
-+-------------------+
-| Shopping Cart     |
-| Service           |
-+-------------------+
-|
-v
-+-------------------+
-| Checkout Service/ |
-| Order Service     |
-+-------------------+
-|
-v
-+---------------------+
-| Transaction Service/|    
-| Purchase History    |            |
-+---------------------+
-|
-v
-+-------------------+
-|     Database      |
-| (Books, Users,    |
-|  Cart, History)   |
-+-------------------+
+
+                +-------------------+     +---------------------+
+   modify cart  |      Client       | <-  | Transaction Service |
+ +------------- | (Web Application) |     |                     |
+ |  |---------> +-------------------+     +---------------------+
+ |  |                   ^                         ^                      
+ |  |                   |                         |
+ |  |                   |browse books      +-------------------+
+ |  |                   |                  |     Database      |
+ |  | view cart         |                  | (Books, Users,    |
+ |  |                   |                  |  Cart, History)   |
+ |  |                   |                  +-------------------+
+ |  |                   |                     |   |     |     ^
+ |  |        +-------------------+            |   |     |     |
+ |  |        | Book Inventory    |<-----------+   |     |     |
+ |  |        | Service           |                |     |     |
+ |  |        +-------------------+                |     |     |
+ |  |                                             |     |     |
+ v  |                        View Cart            |     |     |
++-------------------+  <--------------------------+     |     |
+| Shopping Cart     |        Modify Cart                |     |
+| Service           | -----------------------------------     |
++-------------------+                                         |
+                    |                                         |
+                    V                                         |
+          Checkout Service/ Order Service                     |
++-------------------+      +--------------------+             |
+| Initialize Payment| ->   |     Verify Payment |-------------+
+|                   |      |                    |
++-------------------+      +--------------------+
+
 
 
 ```

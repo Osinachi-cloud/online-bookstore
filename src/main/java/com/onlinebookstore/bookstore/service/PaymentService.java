@@ -7,7 +7,5 @@ import com.onlinebookstore.bookstore.model.dto.response.PaymentVerificationRespo
 public interface PaymentService {
 
     InitializeTransactionResponse initTransaction(InitializeTransactionRequest paymentRequest) throws Exception;
-
-
     PaymentVerificationResponse paymentVerification(String reference) throws Exception;
 }

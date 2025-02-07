@@ -10,6 +10,23 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 
+/**
+ * <p>
+ * This service manages payment initialization and verification
+ * </p>
+ *
+ * <p>
+ * Author: Ogbodo Uchenna
+ * </p>
+ * <p>
+ * Version: 1.0
+ * </p>
+ * <p>
+ * Date: 2025-02-05
+ * </p>
+ */
+
+
 @RestController
 @RequestMapping("/api/v1/payment")
 @Slf4j
@@ -21,6 +38,11 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
+    /**
+     * Passes {@link InitializeTransactionRequest} to initialize payment.*
+     * @return a {@link InitializeTransactionResponse} object which contains the reference.
+     * @throws BookStoreException if an error occurs while calling the endpoint.
+     */
     @PostMapping(value = "/initialize")
     @Transactional
     public InitializeTransactionResponse initializePayment(@RequestBody InitializeTransactionRequest paymentRequest){
@@ -35,6 +57,11 @@ public class PaymentController {
         }
     }
 
+    /**
+     * Passes the reference gotten from initialize payment endpoint.*
+     * @return a {@link PaymentVerificationResponse} object.
+     * @throws BookStoreException if an error occurs while calling the endpoint.
+     */
     @PostMapping(value = "/verify")
     @Transactional
     public PaymentVerificationResponse verifyPayment(@RequestParam String reference){
